@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.cc.josaded.proyectosicopma.MainActivity"
+    android:background="#0B0B39">
+
+    <Button
+        android:text="."
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btnPunto"
+        android:textSize="24sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnCero"
+        android:layout_toEndOf="@+id/btnCero"
+        android:id="@+id/btnBorrar"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:background="#101043"
+        android:text="DEL" />
+
+    <Button
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnCero"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/btnPunto"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="="
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:layout_toEndOf="@+id/btnBorrar"
+        android:id="@+id/btnIgual"
+        android:textSize="29sp"
+        android:elevation="2dp"
+        android:layout_alignTop="@+id/btnTres"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="2"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnUno"
+        android:layout_toEndOf="@+id/btnPunto"
+        android:id="@+id/btnDos"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="3"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnDos"
+        android:layout_toEndOf="@+id/btnCero"
+        android:id="@+id/btnTres"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="4"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_above="@+id/btnUno"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btnCuatro"
+        android:elevation="1dp"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="6"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_above="@+id/btnIgual"
+        android:layout_toEndOf="@+id/btnCinco"
+        android:id="@+id/btnSeis"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="+"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_above="@+id/btnIgual"
+        android:layout_toEndOf="@+id/btnSeis"
+        android:id="@+id/btnSuma"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="7"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_above="@+id/btnCuatro"
+        android:layout_alignParentStart="true"
+        android:id="@+id/btnSiete"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="8"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnSiete"
+        android:layout_toEndOf="@+id/btnCuatro"
+        android:id="@+id/btnOcho"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="9"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnResta"
+        android:layout_toEndOf="@+id/btnCinco"
+        android:id="@+id/btnNueve"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="%"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnPotencia"
+        android:layout_toEndOf="@+id/btnSiete"
+        android:id="@+id/btnPorcentaje"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="√"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnPorcentaje"
+        android:layout_toEndOf="@+id/btnOcho"
+        android:id="@+id/btnRaiz"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="/"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnRaiz"
+        android:layout_toEndOf="@+id/btnNueve"
+        android:id="@+id/btnDivision"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnUno"
+        android:layout_above="@+id/btnPunto"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="5"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnCinco"
+        android:layout_below="@+id/btnSiete"
+        android:layout_toEndOf="@+id/btnCuatro"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="^"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnPotencia"
+        android:textSize="20sp"
+        android:layout_above="@+id/btnSiete"
+        android:layout_alignParentStart="true"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnReiniciar"
+        android:layout_toEndOf="@+id/btnPotencia"
+        android:id="@+id/btnParentesisIzq"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnParentesisIzq"
+        android:layout_toEndOf="@+id/btnPorcentaje"
+        android:id="@+id/btnParentesis"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="*"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/btnParentesis"
+        android:layout_toEndOf="@+id/btnRaiz"
+        android:id="@+id/btnMultiplicar"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPantallaResultado"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="13dp"
+        android:id="@+id/tvHistorial"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:text="Operador:"
+        android:layout_width="wrap_content"
+        android:id="@+id/tvO"
+        android:textSize="17sp"
+        android:layout_height="27dp"
+        android:layout_alignBaseline="@+id/btnPasos"
+        android:layout_alignBottom="@+id/btnPasos"
+        android:layout_alignStart="@+id/tvHistorial"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:text="-"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnResta"
+        android:textSize="20sp"
+        android:layout_below="@+id/btnDivision"
+        android:layout_alignParentEnd="true"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="C "
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:id="@+id/btnReiniciar"
+        android:textSize="20sp"
+        android:background="@android:color/holo_red_light"
+        android:textColor="@android:color/white"
+        android:layout_above="@+id/btnPotencia"
+        android:layout_toStartOf="@+id/tvOperador"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:text="Pasos de solución"
+        android:id="@+id/btnPasos"
+        android:textColor="@android:color/white"
+        android:background="@android:color/holo_red_light"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_width="163dp"
+        android:layout_height="25dp" />
+
+    <TextView
+        android:id="@+id/tvOperador"
+        android:layout_width="40dp"
+        android:textSize="19sp"
+        android:layout_height="27dp"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:layout_alignBaseline="@+id/tvO"
+        android:layout_alignBottom="@+id/tvO"
+        android:layout_toEndOf="@+id/tvO" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="90dp"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/etPantallaResultado"
+        android:textSize="40sp"
+        android:textAlignment="textEnd"
+        android:focusable="false"
+        android:layout_marginTop="14dp"
+        android:textColor="@android:color/white"
+        android:background="#101043"
+        android:layout_below="@+id/btnPasos"
+        android:layout_alignParentStart="true"
+        android:maxLength="10"/>
+</RelativeLayout>
