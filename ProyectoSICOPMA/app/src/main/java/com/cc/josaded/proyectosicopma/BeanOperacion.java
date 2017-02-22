@@ -8,12 +8,13 @@ import java.io.Serializable;
 
 public class BeanOperacion implements Serializable {
 
-    private String historial, btn;
+    private String historial, btn, pasosMostrar;
     private double op1, op2, resultado;
     private boolean igualUsado, puntoUsado;
     private boolean suma, resta, division, multiplicacion, potencia, raiz, porcentaje;
 
     public BeanOperacion() {
+        this.pasosMostrar = "";
         this.historial = "";
         this.btn = "";
         this.igualUsado = false;
@@ -51,10 +52,28 @@ public class BeanOperacion implements Serializable {
                 setResultado((getOp1() * 100) / getOp2());
             }
         }
-
+        setPasosMostrar(getHistorial());
         setBtn(String.valueOf(getResultado()));
         setOp1(getResultado());
         setHistorial(getBtn());
+    }
+
+    public boolean esOperador(){
+        return suma==true||resta==true||division==true||multiplicacion==true||raiz==true||porcentaje==true||potencia==true;
+    }
+
+    public boolean esDecimal(char c){
+        return (c >= '0' && c <= '9') || c =='.';
+    }
+
+    public void desactivarOperadores(){
+        setSuma(false);
+        setResta(false);
+        setMultiplicacion(false);
+        setDivision(false);
+        setPotencia(false);
+        setRaiz(false);
+        setPorcentaje(false);
     }
 
     //GETTERS Y SETTERS:
@@ -168,5 +187,13 @@ public class BeanOperacion implements Serializable {
 
     public void setPorcentaje(boolean porcentaje) {
         this.porcentaje = porcentaje;
+    }
+
+    public String getPasosMostrar() {
+        return pasosMostrar;
+    }
+
+    public void setPasosMostrar(String pasosMostrar) {
+        this.pasosMostrar = pasosMostrar;
     }
 }

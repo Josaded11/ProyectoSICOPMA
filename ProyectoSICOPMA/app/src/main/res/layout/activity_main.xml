@@ -348,4 +348,58 @@
         android:layout_below="@+id/btnPasos"
         android:layout_alignParentStart="true"
         android:maxLength="10"/>
+
+    <TextView
+        android:text="∫"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:id="@+id/tvSignoIntegral"
+        android:textColor="@android:color/white"
+        android:textSize="70sp"
+        android:layout_alignTop="@+id/etPantallaResultado"
+        android:layout_toEndOf="@+id/tvOperador" />
+
+    <EditText
+        android:text=""
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/etIntegral1"
+        android:background="@android:color/background_light"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_alignBottom="@+id/tvSignoIntegral"
+        android:layout_toStartOf="@+id/tvSignoIntegral"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:text=""
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/etIntegral2"
+        android:background="@android:color/background_light"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_alignBaseline="@+id/etIntegral1"
+        android:layout_alignBottom="@+id/etIntegral1"
+        android:layout_toStartOf="@+id/btnPasos" />
+
+    <EditText
+        android:text=""
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/etIntegral3"
+        android:background="@android:color/background_light"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:layout_marginStart="16dp"
+        android:layout_alignBaseline="@+id/etIntegral1"
+        android:layout_alignBottom="@+id/etIntegral1"
+        android:layout_toEndOf="@+id/etIntegral2" />
 </RelativeLayout>

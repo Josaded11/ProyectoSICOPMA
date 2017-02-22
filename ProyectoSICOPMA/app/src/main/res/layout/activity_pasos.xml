@@ -18,7 +18,69 @@
         android:layout_marginStart="5dp"
         android:layout_width="325dp"
         android:layout_height="460dp"
-        android:background="#101043">
+        android:background="#101043"
+        android:id="@+id/contenedorPasos">
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="60dp"
+            android:id="@+id/tvHistorialPasos"
+            android:layout_width="300dp"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="70dp"
+            android:layout_height="60dp"
+            android:id="@+id/tvHistorialPasos2"
+            android:layout_width="300dp"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="130dp"
+            android:layout_height="60dp"
+            android:id="@+id/tvHistorialPasos3"
+            android:layout_width="300dp"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:text="" />
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="190dp"
+            android:layout_height="60dp"
+            android:id="@+id/tvHistorialPasos4"
+            android:layout_width="300dp"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="250dp"
+            android:id="@+id/tvHistorialPasos5"
+            android:layout_width="300dp"
+            android:textSize="24dp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light"
+            android:layout_height="80dp" />
+
+        <TextView
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="330dp"
+            android:layout_height="60dp"
+            android:id="@+id/tvHistorialPasos6"
+            android:layout_width="300dp"
+            android:textSize="17sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_light" />
     </FrameLayout>
 
     <TextView
@@ -30,6 +92,5 @@
         android:layout_width="230dp"
         android:layout_marginTop="30dp"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/frameLayout"
         android:layout_marginStart="21dp" />
 </RelativeLayout>

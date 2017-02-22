@@ -14,6 +14,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     BeanOperacion bo;
+    EditText pantalla;
+    TextView h,op;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
                 Intent irPasos = new Intent(MainActivity.this, PasosActivity.class);
+                irPasos.putExtra("pasos", bo.getPasosMostrar());
+
+                irPasos.putExtra("suma", bo.isSuma());
+                irPasos.putExtra("resta", bo.isResta());
+                irPasos.putExtra("multi", bo.isMultiplicacion());
+                irPasos.putExtra("div", bo.isDivision());
+                irPasos.putExtra("pot", bo.isPotencia());
+                irPasos.putExtra("por", bo.isPorcentaje());
+                irPasos.putExtra("raiz", bo.isRaiz());
+
+                irPasos.putExtra("resultado", bo.getHistorial());
                 startActivity(irPasos);
             }
         });
@@ -75,14 +88,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         reiniciar.setOnClickListener(this);
         Button igual = (Button) findViewById(R.id.btnIgual);
         igual.setOnClickListener(this);
+
+        //INTEGRALES:
+        EditText etIntegral1 = (EditText) findViewById(R.id.etIntegral1);
+        etIntegral1.setVisibility(View.GONE);
+        EditText etIntegral2 = (EditText) findViewById(R.id.etIntegral2);
+        etIntegral2.setVisibility(View.GONE);
+        EditText etIntegral3 = (EditText) findViewById(R.id.etIntegral3);
+        etIntegral3.setVisibility(View.GONE);
+        TextView tvSignoIntegral = (TextView) findViewById(R.id.tvSignoIntegral);
+        tvSignoIntegral.setVisibility(View.GONE);
     }
 
     @Override
     public void onClick(View v) {
 
-        TextView operador = (TextView) findViewById(R.id.tvOperador);
-        TextView h = (TextView) findViewById(R.id.tvHistorial);
-        EditText pantalla = (EditText) findViewById(R.id.etPantallaResultado);
+        op = (TextView) findViewById(R.id.tvOperador);
+        h = (TextView) findViewById(R.id.tvHistorial);
+        pantalla = (EditText) findViewById(R.id.etPantallaResultado);
 
         try {
             switch (v.getId()){
@@ -92,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("0");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"0");
                         bo.setHistorial(bo.getHistorial() + "0");
@@ -102,6 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("1");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"1");
                         bo.setHistorial(bo.getHistorial() + "1");
@@ -112,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("2");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"2");
                         bo.setHistorial(bo.getHistorial() + "2");
@@ -122,6 +154,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("3");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"3");
                         bo.setHistorial(bo.getHistorial() + "3");
@@ -132,6 +167,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("4");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"4");
                         bo.setHistorial(bo.getHistorial() + "4");
@@ -142,6 +180,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("5");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"5");
                         bo.setHistorial(bo.getHistorial() + "5");
@@ -152,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("6");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"6");
                         bo.setHistorial(bo.getHistorial() + "6");
@@ -162,6 +206,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("7");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"7");
                         bo.setHistorial(bo.getHistorial() + "7");
@@ -172,6 +219,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("8");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"8");
                         bo.setHistorial(bo.getHistorial() + "8");
@@ -182,6 +232,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setBtn("9");
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(false);
+                        bo.setIgualUsado(false);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }else{
                         bo.setBtn(bo.getBtn()+"9");
                         bo.setHistorial(bo.getHistorial() + "9");
@@ -192,11 +245,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (bo.getBtn().isEmpty()){
                         if (!bo.isPuntoUsado()){
                             bo.setBtn("0.");
+                            bo.setHistorial(bo.getHistorial()+"0.");
                             bo.setPuntoUsado(true);
                         }
                     }else{
                         if (!bo.isPuntoUsado()){
                             bo.setBtn(bo.getBtn()+".");
+                            bo.setHistorial(bo.getHistorial()+".");
                             bo.setPuntoUsado(true);
                         }
                     }
@@ -204,6 +259,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (bo.isIgualUsado()){
                         bo.setHistorial(bo.getBtn());
                         bo.setPuntoUsado(true);
+                        bo.desactivarOperadores();
+                        op.setText("");
                     }
                     break;
                 case R.id.btnBorrar:
@@ -225,17 +282,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bo.setHistorial("");
                     bo.setPuntoUsado(false);
                     bo.setIgualUsado(false);
-                    bo.setSuma(false);
-                    bo.setResta(false);
-                    bo.setDivision(false);
-                    bo.setMultiplicacion(false);
-                    bo.setPotencia(false);
-                    bo.setRaiz(false);
-                    bo.setPorcentaje(false);
+                    bo.desactivarOperadores();
+                    op.setText("");
+                    h.setText("");
                     break;
                 //CONDICIÓN OPERADORES:
                 case R.id.btnSuma:
-                    if (bo.isSuma()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -246,13 +299,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "+");
+                    op.setText("+");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setSuma(true);
                     break;
                 case R.id.btnResta:
-                    if (bo.isResta()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -263,13 +318,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "-");
+                    op.setText("-");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setResta(true);
                     break;
                 case R.id.btnMultiplicar:
-                    if (bo.isMultiplicacion()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -280,13 +337,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "*");
+                    op.setText("*");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setMultiplicacion(true);
                     break;
                 case R.id.btnDivision:
-                    if (bo.isDivision()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -297,13 +356,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "/");
+                    op.setText("/");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setDivision(true);
                     break;
                 case R.id.btnPotencia:
-                    if (bo.isPotencia()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -314,13 +375,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "^");
+                    op.setText("^");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setPotencia(true);
                     break;
                 case R.id.btnRaiz:
-                    if (bo.isRaiz()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -331,13 +394,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "√");
+                    op.setText("√");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setRaiz(true);
                     break;
                 case R.id.btnPorcentaje:
-                    if (bo.isPorcentaje()){
+                    if (bo.esOperador()){
                         if (bo.getBtn().equals("")){
                             bo.setOp2(0);
                         }else{
@@ -348,9 +413,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
                     }
                     bo.setHistorial(bo.getHistorial() + "%");
+                    op.setText("%");
                     bo.setBtn("");
                     bo.setIgualUsado(false);
                     bo.setPuntoUsado(false);
+                    bo.desactivarOperadores();
                     bo.setPorcentaje(true);
                     break;
                 case R.id.btnIgual:
@@ -363,13 +430,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bo.setResultado(0);
                     bo.setIgualUsado(true);
                     bo.setPuntoUsado(false);
-                    bo.setSuma(false);
-                    bo.setResta(false);
-                    bo.setMultiplicacion(false);
-                    bo.setDivision(false);
-                    bo.setPotencia(false);
-                    bo.setRaiz(false);
-                    bo.setPorcentaje(false);
                     break;
             }
             pantalla.setText(bo.getBtn());
