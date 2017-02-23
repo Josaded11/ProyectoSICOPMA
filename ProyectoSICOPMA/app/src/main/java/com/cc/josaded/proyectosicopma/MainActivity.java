@@ -288,12 +288,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 //CONDICIÓN OPERADORES:
                 case R.id.btnSuma:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
-                        }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        }
+                    if (bo.esOperador() && !bo.isIgualUsado()){
+                        bo.setOp2(Double.parseDouble(bo.getBtn()));
                         bo.calcular();
                     }else{
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
@@ -307,12 +303,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bo.setSuma(true);
                     break;
                 case R.id.btnResta:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
-                        }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        }
+                    if (bo.esOperador() && !bo.isIgualUsado()){
+                        bo.setOp2(Double.parseDouble(bo.getBtn()));
                         bo.calcular();
                     }else{
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
@@ -326,12 +318,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bo.setResta(true);
                     break;
                 case R.id.btnMultiplicar:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
-                        }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        }
+                    if (bo.esOperador() && !bo.isIgualUsado()){
+                        bo.setOp2(Double.parseDouble(bo.getBtn()));
                         bo.calcular();
                     }else{
                         bo.setOp1(Double.parseDouble(bo.getBtn()));
@@ -345,12 +333,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     bo.setMultiplicacion(true);
                     break;
                 case R.id.btnDivision:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
-                        }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        }
+                    if (bo.esOperador() && !bo.isIgualUsado()){
+                        bo.setOp2(Double.parseDouble(bo.getBtn()));
                         bo.calcular();
                     }else{
                         bo.setOp1(Double.parseDouble(bo.getBtn()));

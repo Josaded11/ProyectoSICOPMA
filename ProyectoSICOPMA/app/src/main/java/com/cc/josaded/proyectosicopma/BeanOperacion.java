@@ -37,7 +37,14 @@ public class BeanOperacion implements Serializable {
         if (isResta() == true){setResultado(getOp1() - getOp2());}
         if (isMultiplicacion() == true){setResultado(getOp1() * getOp2());}
         if (isDivision() == true){setResultado(getOp1() / getOp2());}
-        if (isPotencia() == true){setResultado(Math.pow(getOp1(),getOp2()));}
+        if (isPotencia() == true){
+            if (op2 == 0){
+                op2 = 1;
+                setResultado(Math.pow(getOp1(),getOp2()));
+            }else{
+                setResultado(Math.pow(getOp1(),getOp2()));
+            }
+        }
         if (isRaiz() == true){
             if (op2 == 0){
                 setResultado(Math.sqrt(getOp1()));
