@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 /**
@@ -13,15 +14,45 @@ import android.widget.TextView;
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    BeanOperacion bo;
-    EditText pantalla;
-    TextView h,op;
+    private BeanOperacion bo;
+    private EditText pantalla;
+    private TextView h,op;
+    private double op1,op2 = 0;
+    private Button cero,uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,punto,borrar,reiniciar,igual,sumar,restar,dividir,multiplicar,raiz,potencia,porcentaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         bo = new BeanOperacion();
+
+        RadioButton rDerivada = (RadioButton) findViewById(R.id.rbDerivadas);
+        rDerivada.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent e = new Intent(MainActivity.this, DerivadaActivity.class);
+                startActivity(e);
+                finish();
+            }
+        });
+        RadioButton rIntegral = (RadioButton) findViewById(R.id.rbIntegrales);
+        rIntegral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent e = new Intent(MainActivity.this, IntegralActivity.class);
+                startActivity(e);
+                finish();
+            }
+        });
+        RadioButton rEcuacion = (RadioButton) findViewById(R.id.rbEcuaciones);
+        rEcuacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent e = new Intent(MainActivity.this, EcuacionActivity.class);
+                startActivity(e);
+                finish();
+            }
+        });
 
         Button next = (Button) findViewById(R.id.btnPasos);
         next.setOnClickListener(new View.OnClickListener() {
@@ -43,61 +74,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        //NÚMEROS:
-        Button cero = (Button) findViewById(R.id.btnCero);
+        cero = (Button) findViewById(R.id.btnCero);
         cero.setOnClickListener(this);
-        Button uno = (Button) findViewById(R.id.btnUno);
+        uno = (Button) findViewById(R.id.btnUno);
         uno.setOnClickListener(this);
-        Button dos = (Button) findViewById(R.id.btnDos);
+        dos = (Button) findViewById(R.id.btnDos);
         dos.setOnClickListener(this);
-        Button tres = (Button) findViewById(R.id.btnTres);
+        tres = (Button) findViewById(R.id.btnTres);
         tres.setOnClickListener(this);
-        Button cuatro = (Button) findViewById(R.id.btnCuatro);
+        cuatro = (Button) findViewById(R.id.btnCuatro);
         cuatro.setOnClickListener(this);
-        Button cinco = (Button) findViewById(R.id.btnCinco);
+        cinco = (Button) findViewById(R.id.btnCinco);
         cinco.setOnClickListener(this);
-        Button seis = (Button) findViewById(R.id.btnSeis);
+        seis = (Button) findViewById(R.id.btnSeis);
         seis.setOnClickListener(this);
-        Button siete = (Button) findViewById(R.id.btnSiete);
+        siete = (Button) findViewById(R.id.btnSiete);
         siete.setOnClickListener(this);
-        Button ocho = (Button) findViewById(R.id.btnOcho);
+        ocho = (Button) findViewById(R.id.btnOcho);
         ocho.setOnClickListener(this);
-        Button nueve = (Button) findViewById(R.id.btnNueve);
+        nueve = (Button) findViewById(R.id.btnNueve);
         nueve.setOnClickListener(this);
         //OPERADORES:
-        Button multiplicar = (Button) findViewById(R.id.btnMultiplicar);
+        multiplicar = (Button) findViewById(R.id.btnMultiplicar);
         multiplicar.setOnClickListener(this);
-        Button dividir = (Button) findViewById(R.id.btnDivision);
+        dividir = (Button) findViewById(R.id.btnDivision);
         dividir.setOnClickListener(this);
-        Button sumar = (Button) findViewById(R.id.btnSuma);
+        sumar = (Button) findViewById(R.id.btnSuma);
         sumar.setOnClickListener(this);
-        Button restar = (Button) findViewById(R.id.btnResta);
+        restar = (Button) findViewById(R.id.btnResta);
         restar.setOnClickListener(this);
-        Button porcentaje = (Button) findViewById(R.id.btnPorcentaje);
+        porcentaje = (Button) findViewById(R.id.btnPorcentaje);
         porcentaje.setOnClickListener(this);
-        Button potencia = (Button) findViewById(R.id.btnPotencia);
+        potencia = (Button) findViewById(R.id.btnPotencia);
         potencia.setOnClickListener(this);
-        Button raiz = (Button) findViewById(R.id.btnRaiz);
+        raiz = (Button) findViewById(R.id.btnRaiz);
         raiz.setOnClickListener(this);
         //EXTRAS:
-        Button punto = (Button) findViewById(R.id.btnPunto);
+        punto = (Button) findViewById(R.id.btnPunto);
         punto.setOnClickListener(this);
-        Button borrar = (Button) findViewById(R.id.btnBorrar);
+        borrar = (Button) findViewById(R.id.btnBorrar);
         borrar.setOnClickListener(this);
-        Button reiniciar = (Button) findViewById(R.id.btnReiniciar);
+        reiniciar = (Button) findViewById(R.id.btnReiniciar);
         reiniciar.setOnClickListener(this);
-        Button igual = (Button) findViewById(R.id.btnIgual);
+        igual = (Button) findViewById(R.id.btnIgual);
         igual.setOnClickListener(this);
-
-        //INTEGRALES:
-        EditText etIntegral1 = (EditText) findViewById(R.id.etIntegral1);
-        etIntegral1.setVisibility(View.GONE);
-        EditText etIntegral2 = (EditText) findViewById(R.id.etIntegral2);
-        etIntegral2.setVisibility(View.GONE);
-        EditText etIntegral3 = (EditText) findViewById(R.id.etIntegral3);
-        etIntegral3.setVisibility(View.GONE);
-        TextView tvSignoIntegral = (TextView) findViewById(R.id.tvSignoIntegral);
-        tvSignoIntegral.setVisibility(View.GONE);
     }
 
     @Override
@@ -269,12 +289,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             bo.setPuntoUsado(false);
                         }
                         bo.setBtn(bo.getBtn().substring(0,bo.getBtn().length()-1));
-                    }
-                    if (!bo.getBtn().isEmpty()){
-                        if (bo.getBtn().charAt(bo.getBtn().length()-1)=='.'){
-                            bo.setPuntoUsado(false);
-                        }
-                        bo.setBtn(bo.getBtn().substring(0,bo.getBtn().length()-1));
+                        bo.setHistorial(bo.getHistorial().substring(0,bo.getHistorial().length()-1));
                     }
                     break;
                 case R.id.btnReiniciar:

@@ -43,6 +43,10 @@ public class PasosActivity extends AppCompatActivity{
             }
         }
 
+        op1 = disminuirDecimales(op1);
+        op2 = disminuirDecimales(op2);
+
+
         //BÚSQUEDA DE LA OPERACIÓN ACTIVA:
         if (getIntent().getExtras().getBoolean("suma")){
             col1.setText("Suma");
@@ -65,7 +69,7 @@ public class PasosActivity extends AppCompatActivity{
         if (getIntent().getExtras().getBoolean("div")){
             col1.setText("División");
             col2.setText(op1+" / "+op2);
-            col5.setText("");
+            col5.setText("Divide "+op2+" entre "+op1);
             col6.setText("Resultado:  "+resultado);
         }
         if (getIntent().getExtras().getBoolean("pot")){
@@ -76,17 +80,33 @@ public class PasosActivity extends AppCompatActivity{
         }
         if (getIntent().getExtras().getBoolean("por")){
             col1.setText("Porcentaje");
-            col2.setText(op1+" * 100");
-            col3.setText((Double.parseDouble(op1)*100)+" / "+op2);
-            col5.setText("Multiplica "+op1+" por 100, y divide entre "+op2+".");
-            col6.setText("Resultado:  "+resultado);
+            col2.setText("1. Multiplica " + op1 + " por 100:");
+            col3.setText(op1+" * 100   =   " + (Double.parseDouble(op1)*100));
+            col4.setText("2. Divide el resultado entre " + op2 + ":");
+            col5.setText((Double.parseDouble(op1)*100)+" / "+op2 + "   =   " + ((Double.parseDouble(op1)*100)/Double.parseDouble(op2)) );
+            col6.setText("Resultado:  " + ((Double.parseDouble(op1)*100)/Double.parseDouble(op2)));
         }
         if (getIntent().getExtras().getBoolean("raiz")){
             col1.setText("Raíz");
-            col2.setText(op1+" √ "+op2);
-            col3.setText(op1+" * "+(Math.sqrt(Double.parseDouble(op2))));
-            col5.setText("Simplifica la raíz de "+op2+", y multiplica por "+op1+".");
-            col6.setText("Resultado:  "+resultado);
+            col2.setText("1. Saca la raíz cuadrada de " + op2 + ":");
+            col3.setText("√ "+op2 + "    =   " + (Math.sqrt(Double.parseDouble(op2))));
+            col4.setText("2. Multiplica el resultado " + (Math.sqrt(Double.parseDouble(op2))) + " por " + op1 + ":");
+            col5.setText(op1+" * "+(Math.sqrt(Double.parseDouble(op2))));
+            col6.setText("Resultado:  "+ ((Math.sqrt(Double.parseDouble(op2))) + op1));
         }
+    }
+
+    public String disminuirDecimales(String cadena){
+        String r = "";
+        for (int i=0;i<cadena.length(); i++){
+            if (cadena.charAt(i) == '.' && cadena.charAt(i+1) == '0'){
+                return r;
+            }else if (cadena.charAt(i) == '.' && !(cadena.charAt(i+1) == '0')){
+                return r+cadena.charAt(i)+cadena.charAt(i+1);
+            }else{
+                r += cadena.charAt(i);
+            }
+        }
+        return r;
     }
 }

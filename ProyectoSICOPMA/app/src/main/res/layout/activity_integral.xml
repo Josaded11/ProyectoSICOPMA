@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_integral"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cc.josaded.proyectosicopma.MainActivity"
+    tools:context="com.cc.josaded.proyectosicopma.IntegralActivity"
     android:background="#0B0B39">
 
     <Button
@@ -160,24 +159,24 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="%"
+        android:text="x"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnPotencia"
         android:layout_toEndOf="@+id/btnSiete"
-        android:id="@+id/btnPorcentaje"
+        android:id="@+id/btnX"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="√"
+        android:text="y"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnPorcentaje"
+        android:layout_alignTop="@+id/btnX"
         android:layout_toEndOf="@+id/btnOcho"
-        android:id="@+id/btnRaiz"
+        android:id="@+id/btnY"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
@@ -187,7 +186,7 @@
         android:text="/"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnRaiz"
+        android:layout_alignTop="@+id/btnY"
         android:layout_toEndOf="@+id/btnNueve"
         android:id="@+id/btnDivision"
         android:textSize="20sp"
@@ -232,11 +231,12 @@
         android:textStyle="normal|bold" />
 
     <Button
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnReiniciar"
         android:layout_toEndOf="@+id/btnPotencia"
-        android:id="@+id/btnX"
+        android:id="@+id/button1"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
@@ -244,11 +244,12 @@
         android:enabled="false" />
 
     <Button
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnX"
-        android:layout_toEndOf="@+id/btnPorcentaje"
-        android:id="@+id/btnY"
+        android:layout_alignTop="@+id/button1"
+        android:layout_toEndOf="@+id/btnX"
+        android:id="@+id/button2"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
@@ -259,8 +260,8 @@
         android:text="*"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnY"
-        android:layout_toEndOf="@+id/btnRaiz"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toEndOf="@+id/btnY"
         android:id="@+id/btnMultiplicar"
         android:textSize="20sp"
         android:background="#101043"
@@ -278,7 +279,6 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:text="Operador:"
         android:layout_width="wrap_content"
         android:id="@+id/tvO"
         android:textSize="17sp"
@@ -309,7 +309,7 @@
         android:background="@android:color/holo_red_light"
         android:textColor="@android:color/white"
         android:layout_above="@+id/btnPotencia"
-        android:layout_toStartOf="@+id/tvOperador"
+        android:layout_toStartOf="@+id/btnPorcentaje"
         android:textStyle="normal|bold" />
 
     <Button
@@ -378,7 +378,9 @@
             android:layout_marginStart="17dp"
             android:id="@+id/rbIntegrales"
             android:textSize="16sp"
-            android:onClick="integrar" />
+            android:onClick="integrar"
+            android:checked="true"
+            android:enabled="false" />
 
         <RadioButton
             android:text="Derivadas"
@@ -390,7 +392,8 @@
             android:layout_alignBottom="@+id/rbEcuaciones"
             android:layout_alignStart="@+id/rbIntegrales"
             android:textSize="16sp"
-            android:onClick="derivar" />
+            android:onClick="derivar"
+            android:enabled="true" />
 
         <RadioButton
             android:text="Operaciones básicas"
@@ -399,12 +402,31 @@
             android:id="@+id/rbOpBasicas"
             android:layout_alignTop="@+id/rgOpcion"
             android:layout_marginStart="17dp"
-            android:checked="true"
             android:layout_alignStart="@+id/rbEcuaciones"
             android:textSize="16sp"
-            android:onClick="calcularOpBasica"
-            android:enabled="false" />
+            android:onClick="calcularOpBasica" />
 
     </RadioGroup>
+
+    <TextView
+        android:text="   ∫"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvIntegral"
+        android:textSize="60sp"
+        android:textColor="@android:color/background_light"
+        android:textAlignment="center"
+        android:layout_alignBaseline="@+id/etPantallaResultado"
+        android:layout_alignBottom="@+id/etPantallaResultado"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:id="@+id/btnForm"
+        android:background="@android:color/holo_red_light"
+        android:text="Formulario"
+        android:layout_above="@+id/etPantallaResultado"
+        android:layout_toEndOf="@+id/tvOperador" />
 
 </RelativeLayout>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+    android:id="@+id/activity_ecuacion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.cc.josaded.proyectosicopma.MainActivity"
+    tools:context="com.cc.josaded.proyectosicopma.EcuacionActivity"
     android:background="#0B0B39">
 
     <Button
@@ -232,6 +231,7 @@
         android:textStyle="normal|bold" />
 
     <Button
+        android:text="x"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnReiniciar"
@@ -240,10 +240,10 @@
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold"
-        android:enabled="false" />
+        android:textStyle="normal|bold" />
 
     <Button
+        android:text="y"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnX"
@@ -252,8 +252,7 @@
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold"
-        android:enabled="false" />
+        android:textStyle="normal|bold" />
 
     <Button
         android:text="*"
@@ -278,7 +277,7 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:text="Operador:"
+        android:text="Derivar"
         android:layout_width="wrap_content"
         android:id="@+id/tvO"
         android:textSize="17sp"
@@ -309,7 +308,7 @@
         android:background="@android:color/holo_red_light"
         android:textColor="@android:color/white"
         android:layout_above="@+id/btnPotencia"
-        android:layout_toStartOf="@+id/tvOperador"
+        android:layout_toStartOf="@+id/btnPorcentaje"
         android:textStyle="normal|bold" />
 
     <Button
@@ -367,7 +366,9 @@
             android:layout_marginStart="17dp"
             android:id="@+id/rbEcuaciones"
             android:textSize="16sp"
-            android:onClick="calcularEcuacion" />
+            android:onClick="calcularEcuacion"
+            android:checked="true"
+            android:enabled="false" />
 
         <RadioButton
             android:text="Integrales"
@@ -399,12 +400,21 @@
             android:id="@+id/rbOpBasicas"
             android:layout_alignTop="@+id/rgOpcion"
             android:layout_marginStart="17dp"
-            android:checked="true"
             android:layout_alignStart="@+id/rbEcuaciones"
             android:textSize="16sp"
-            android:onClick="calcularOpBasica"
-            android:enabled="false" />
+            android:onClick="calcularOpBasica" />
 
     </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvDerivada"
+        android:textSize="40sp"
+        android:textColor="@android:color/background_light"
+        android:textAlignment="center"
+        android:layout_alignBaseline="@+id/etPantallaResultado"
+        android:layout_alignBottom="@+id/etPantallaResultado"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
