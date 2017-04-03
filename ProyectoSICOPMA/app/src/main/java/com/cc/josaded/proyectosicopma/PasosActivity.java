@@ -2,20 +2,17 @@ package com.cc.josaded.proyectosicopma;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
 import android.widget.TextView;
 
 public class PasosActivity extends AppCompatActivity{
 
     TextView col1,col2,col3,col4,col5,col6;
-    BeanOperacion bo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pasos);
-        bo = new BeanOperacion();
+
         col1 = (TextView) findViewById(R.id.tvHistorialPasos);
         col2 = (TextView) findViewById(R.id.tvHistorialPasos2);
         col3 = (TextView) findViewById(R.id.tvHistorialPasos3);
@@ -32,7 +29,7 @@ public class PasosActivity extends AppCompatActivity{
         char c;
         for (int i=0; i<historial.length();i++){
             c = historial.charAt(i);
-            if (bo.esDecimal(c)){
+            if (esDecimal(c)){
                 if (opOk){
                     op2 += c;
                 }else{
@@ -108,5 +105,9 @@ public class PasosActivity extends AppCompatActivity{
             }
         }
         return r;
+    }
+
+    public boolean esDecimal(char c){
+        return (c >= '0' && c <= '9') || c =='.';
     }
 }

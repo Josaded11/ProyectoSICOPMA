@@ -1,6 +1,7 @@
 package com.cc.josaded.proyectosicopma;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -8,23 +9,44 @@ import android.widget.EditText;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Stack;
 
 /**
  * Created by Josaded on 12/02/2017.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private BeanOperacion bo;
     private EditText pantalla;
     private TextView h,op;
-    private double op1,op2 = 0;
     private Button cero,uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,punto,borrar,reiniciar,igual,sumar,restar,dividir,multiplicar,raiz,potencia,porcentaje;
+
+    private String historial, btn, pasosMostrar;
+    private double op1, op2, resultado;
+    private boolean igualUsado, puntoUsado;
+    private boolean isSuma, isResta, isDivision, isMultiplicacion, isPotencia, isRaiz, isPorcentaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bo = new BeanOperacion();
+
+        pasosMostrar = "";
+        historial = "";
+        btn = "";
+        igualUsado = false;
+        puntoUsado = false;
+        op1 = 0;
+        op2 = 0;
+        resultado = 0;
+        isSuma = false;
+        isResta = false;
+        isDivision = false;
+        isMultiplicacion = false;
+        isPotencia = false;
+        isRaiz = false;
+        isPorcentaje = false;
 
         RadioButton rDerivada = (RadioButton) findViewById(R.id.rbDerivadas);
         rDerivada.setOnClickListener(new View.OnClickListener() {
@@ -58,18 +80,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent irPasos = new Intent(MainActivity.this, PasosActivity.class);
-                irPasos.putExtra("pasos", bo.getPasosMostrar());
+                if (igualUsado){
+                    Intent irPasos = new Intent(MainActivity.this, PasosActivity.class);
+                    irPasos.putExtra("pasos", pasosMostrar);
 
-                irPasos.putExtra("suma", bo.isSuma());
-                irPasos.putExtra("resta", bo.isResta());
-                irPasos.putExtra("multi", bo.isMultiplicacion());
-                irPasos.putExtra("div", bo.isDivision());
-                irPasos.putExtra("pot", bo.isPotencia());
-                irPasos.putExtra("por", bo.isPorcentaje());
-                irPasos.putExtra("raiz", bo.isRaiz());
+                    irPasos.putExtra("suma", isSuma);
+                    irPasos.putExtra("resta", isResta);
+                    irPasos.putExtra("multi", isMultiplicacion);
+                    irPasos.putExtra("div", isDivision);
+                    irPasos.putExtra("pot", isPotencia);
+                    irPasos.putExtra("por", isPorcentaje);
+                    irPasos.putExtra("raiz", isRaiz);
 
-                irPasos.putExtra("resultado", bo.getHistorial());
+                    irPasos.putExtra("resultado", historial);
+                    startActivity(irPasos);
+                }else{
+                    Toast.makeText(getApplication(),String.valueOf("No hay operación para mostrar"),Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        Button historialGen = (Button) findViewById(R.id.btnHistorial);
+        historialGen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irPasos = new Intent(MainActivity.this, HistorialActivity.class);
                 startActivity(irPasos);
             }
         });
@@ -131,311 +166,370 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             switch (v.getId()){
                 //CONDICIÓN NÚMEROS:
                 case R.id.btnCero:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("0");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "0";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"0");
-                        bo.setHistorial(bo.getHistorial() + "0");
+                        btn = btn+"0";
+                        historial = historial + "0";
                     }
                     break;
                 case R.id.btnUno:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("1");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "1";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"1");
-                        bo.setHistorial(bo.getHistorial() + "1");
+                        btn = btn+"1";
+                        historial = historial + "1";
                     }
                     break;
                 case R.id.btnDos:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("2");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "2";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"2");
-                        bo.setHistorial(bo.getHistorial() + "2");
+                        btn = btn+"2";
+                        historial = historial + "2";
                     }
                     break;
                 case R.id.btnTres:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("3");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "3";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"3");
-                        bo.setHistorial(bo.getHistorial() + "3");
+                        btn = btn+"3";
+                        historial = historial + "3";
                     }
                     break;
                 case R.id.btnCuatro:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("4");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "4";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"4");
-                        bo.setHistorial(bo.getHistorial() + "4");
+                        btn = btn+"4";
+                        historial = historial + "4";
                     }
                     break;
                 case R.id.btnCinco:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("5");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "5";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"5");
-                        bo.setHistorial(bo.getHistorial() + "5");
+                        btn = btn+"5";
+                        historial = historial + "5";
                     }
                     break;
                 case R.id.btnSeis:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("6");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "6";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"6");
-                        bo.setHistorial(bo.getHistorial() + "6");
+                        btn = btn+"6";
+                        historial = historial + "6";
                     }
                     break;
                 case R.id.btnSiete:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("7");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "7";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"7");
-                        bo.setHistorial(bo.getHistorial() + "7");
+                        btn = btn+"7";
+                        historial = historial + "7";
                     }
                     break;
                 case R.id.btnOcho:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("8");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "8";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"8");
-                        bo.setHistorial(bo.getHistorial() + "8");
+                        btn = btn+"8";
+                        historial = historial + "8";
                     }
                     break;
                 case R.id.btnNueve:
-                    if (bo.isIgualUsado()){
-                        bo.setBtn("9");
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(false);
-                        bo.setIgualUsado(false);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        btn = "9";
+                        historial = btn;
+                        puntoUsado = false;
+                        igualUsado = false;
+                        desactivarOperadores();
                         op.setText("");
                     }else{
-                        bo.setBtn(bo.getBtn()+"9");
-                        bo.setHistorial(bo.getHistorial() + "9");
+                        btn = btn+"9";
+                        historial = historial + "9";
                     }
                     break;
                 //CONDICIÓN EXTRAS:
                 case R.id.btnPunto:
-                    if (bo.getBtn().isEmpty()){
-                        if (!bo.isPuntoUsado()){
-                            bo.setBtn("0.");
-                            bo.setHistorial(bo.getHistorial()+"0.");
-                            bo.setPuntoUsado(true);
+                    if (btn.isEmpty()){
+                        if (!puntoUsado){
+                            btn = "0.";
+                            historial = historial+"0.";
+                            puntoUsado = true;
                         }
                     }else{
-                        if (!bo.isPuntoUsado()){
-                            bo.setBtn(bo.getBtn()+".");
-                            bo.setHistorial(bo.getHistorial()+".");
-                            bo.setPuntoUsado(true);
+                        if (!puntoUsado){
+                            btn = btn +".";
+                            historial = historial + ".";
+                            puntoUsado = true;
                         }
                     }
 
-                    if (bo.isIgualUsado()){
-                        bo.setHistorial(bo.getBtn());
-                        bo.setPuntoUsado(true);
-                        bo.desactivarOperadores();
+                    if (igualUsado){
+                        historial = btn;
+                        puntoUsado = true;
+                        desactivarOperadores();
                         op.setText("");
                     }
                     break;
                 case R.id.btnBorrar:
-                    if (!bo.getBtn().isEmpty()){
-                        if (bo.getBtn().charAt(bo.getBtn().length()-1)=='.'){
-                            bo.setPuntoUsado(false);
+                    if (!btn.isEmpty()){
+                        if (btn.charAt(btn.length()-1)=='.'){
+                            puntoUsado = false;
                         }
-                        bo.setBtn(bo.getBtn().substring(0,bo.getBtn().length()-1));
-                        bo.setHistorial(bo.getHistorial().substring(0,bo.getHistorial().length()-1));
+                        btn = btn.substring(0,btn.length()-1);
+                        historial = historial.substring(0,historial.length()-1);
                     }
                     break;
                 case R.id.btnReiniciar:
-                    bo.setBtn("");
-                    bo.setHistorial("");
-                    bo.setPuntoUsado(false);
-                    bo.setIgualUsado(false);
-                    bo.desactivarOperadores();
+                    btn = "";
+                    historial = "";
+                    puntoUsado = false;
+                    igualUsado = false;
+                    desactivarOperadores();
                     op.setText("");
                     h.setText("");
                     break;
                 //CONDICIÓN OPERADORES:
                 case R.id.btnSuma:
-                    if (bo.esOperador() && !bo.isIgualUsado()){
-                        bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        bo.calcular();
+                    if (esOperador() && !igualUsado){
+                        op2 = Double.parseDouble(btn);
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "+");
+                    historial = historial + "+";
                     op.setText("+");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setSuma(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isSuma = true;
                     break;
                 case R.id.btnResta:
-                    if (bo.esOperador() && !bo.isIgualUsado()){
-                        bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        bo.calcular();
+                    if (esOperador() && !igualUsado){
+                        op2 = Double.parseDouble(btn);
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "-");
+                    historial = historial + "-";
                     op.setText("-");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setResta(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isResta = true;
                     break;
                 case R.id.btnMultiplicar:
-                    if (bo.esOperador() && !bo.isIgualUsado()){
-                        bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        bo.calcular();
+                    if (esOperador() && !igualUsado){
+                        op2 = Double.parseDouble(btn);
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "*");
+                    historial = historial + "*";
                     op.setText("*");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setMultiplicacion(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isMultiplicacion = true;
                     break;
                 case R.id.btnDivision:
-                    if (bo.esOperador() && !bo.isIgualUsado()){
-                        bo.setOp2(Double.parseDouble(bo.getBtn()));
-                        bo.calcular();
+                    if (esOperador() && !igualUsado){
+                        op2 = Double.parseDouble(btn);
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "/");
+                    historial = historial + "/";
                     op.setText("/");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setDivision(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isDivision = true;
                     break;
                 case R.id.btnPotencia:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
+                    if (esOperador()){
+                        if (btn.equals("")){
+                            op2 = 0;
                         }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
+                            op2 = Double.parseDouble(btn);
                         }
-                        bo.calcular();
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "^");
+                    historial = historial + "^";
                     op.setText("^");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setPotencia(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isPotencia = true;
                     break;
                 case R.id.btnRaiz:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
+                    if (esOperador()){
+                        if (btn.equals("")){
+                            op2 = 0;
                         }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
+                            op2 = Double.parseDouble(btn);
                         }
-                        bo.calcular();
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "√");
+                    historial = historial + "√";
                     op.setText("√");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setRaiz(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isRaiz = true;
                     break;
                 case R.id.btnPorcentaje:
-                    if (bo.esOperador()){
-                        if (bo.getBtn().equals("")){
-                            bo.setOp2(0);
+                    if (esOperador()){
+                        if (btn.equals("")){
+                            op2 = 0;
                         }else{
-                            bo.setOp2(Double.parseDouble(bo.getBtn()));
+                            op2 = Double.parseDouble(btn);
                         }
-                        bo.calcular();
+                        calcular();
                     }else{
-                        bo.setOp1(Double.parseDouble(bo.getBtn()));
+                        op1 = Double.parseDouble(btn);
                     }
-                    bo.setHistorial(bo.getHistorial() + "%");
+                    historial = historial + "%";
                     op.setText("%");
-                    bo.setBtn("");
-                    bo.setIgualUsado(false);
-                    bo.setPuntoUsado(false);
-                    bo.desactivarOperadores();
-                    bo.setPorcentaje(true);
+                    btn = "";
+                    igualUsado = false;
+                    puntoUsado = false;
+                    desactivarOperadores();
+                    isPorcentaje = true;
                     break;
                 case R.id.btnIgual:
-                    if (bo.getBtn().equals("")){
-                        bo.setOp2(0);
+                    if (btn.equals("")){
+                        op2 = 0;
                     }else{
-                        bo.setOp2(Double.parseDouble(bo.getBtn()));
+                        op2 = Double.parseDouble(btn);
                     }
-                    bo.calcular();
-                    bo.setResultado(0);
-                    bo.setIgualUsado(true);
-                    bo.setPuntoUsado(false);
+                    calcular();
+                    resultado = 0;
+                    igualUsado = true;
+                    puntoUsado = false;
                     break;
             }
-            pantalla.setText(bo.getBtn());
-            h.setText(bo.getHistorial());
+            pantalla.setText(btn);
+            h.setText(historial);
         } catch (Exception e) {
             pantalla.setText("Error");
         }
+    }
+
+    public void calcular () {
+
+        Conexion con = new Conexion(getApplicationContext(),"historial3.sqlite",null,1);
+        SQLiteDatabase db = con.getWritableDatabase();
+        String sql = "insert into operaciones (tipo,operacion,resultado) values ";
+
+        if (isSuma == true){resultado = op1 + op2; sql += "('Suma: ','"+ op1 + "+" + op2 + "','"+ resultado +"')";}
+        if (isResta == true){resultado = op1 - op2; sql += "('Resta: ','"+ op1 + "-" + op2 + "','"+ resultado +"')";}
+        if (isMultiplicacion == true){resultado = op1 * op2; sql += "('Multiplicar: ','"+ op1 + "*" + op2 + "','"+ resultado +"')";}
+        if (isDivision == true){resultado = op1 / op2; sql += "('Dividir: ','"+ op1 + "/" + op2 + "','"+ resultado +"')";}
+        if (isPotencia == true){
+            if (op2 == 0){
+                op2 = 1;
+                resultado = Math.pow(op1,op2);
+            }else{
+                resultado = Math.pow(op1,op2);
+            }
+            sql += "('Potencia: ','"+ op1 + "^" + op2 + "','"+ resultado +"')";
+        }
+        if (isRaiz == true){
+            if (op2 == 0){
+                resultado = Math.sqrt(op1);
+                sql += "('Raíz: ','"+ op1 + "√" + op2 + "','"+ resultado +"')";
+            }else{
+                resultado = op1 * Math.sqrt(op2);
+                sql += "('Raíz: ','"+ op1 + "√" + op2 + "','"+ resultado +"')";
+            }
+        }
+        if (isPorcentaje == true){
+            if (op2 == 0){
+                resultado = op1 / 100;
+                sql += "('Porcentaje: ','"+ op1 + "%','"+ resultado +"')";
+            }else{
+                resultado = (op1 * 100) / op2;
+                sql += "('Porcentaje: ','"+ op1 + "%" + op2 + "','"+ resultado +"')";
+            }
+        }
+        db.execSQL(sql);
+        db.close();
+        pasosMostrar = historial;
+        btn = String.valueOf(resultado);
+        op1 = resultado;
+        historial = btn;
+    }
+
+    public boolean esOperador(){
+        return isSuma==true||isResta==true||isDivision==true||isMultiplicacion==true||isRaiz==true||isPorcentaje==true||isPotencia==true;
+    }
+
+    public void desactivarOperadores(){
+        isSuma = false;
+        isResta = false;
+        isMultiplicacion = false;
+        isDivision = false;
+        isPotencia = false;
+        isRaiz = false;
+        isPorcentaje = false;
     }
 
 

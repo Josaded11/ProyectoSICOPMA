@@ -1,6 +1,7 @@
 package com.cc.josaded.proyectosicopma;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -75,6 +76,7 @@ public class DerivadaActivity extends AppCompatActivity implements View.OnClickL
                     irPasos.putExtra("potencia", pot);
                     irPasos.putExtra("incognita", inc);
                     irPasos.putExtra("operacion", enviarDerivada);
+                    irPasos.putExtra("clase","d");
                     startActivity(irPasos);
                 }else{
                     Toast.makeText(getApplication(),String.valueOf("No hay operación para mostrar"),Toast.LENGTH_SHORT).show();
@@ -88,6 +90,16 @@ public class DerivadaActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 Intent irPasos = new Intent(DerivadaActivity.this, FormularioActivity.class);
+                irPasos.putExtra("clase","d");
+                startActivity(irPasos);
+            }
+        });
+
+        Button historialGen = (Button) findViewById(R.id.btnHistorial);
+        historialGen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irPasos = new Intent(DerivadaActivity.this, HistorialActivity.class);
                 startActivity(irPasos);
             }
         });
@@ -265,6 +277,11 @@ public class DerivadaActivity extends AppCompatActivity implements View.OnClickL
                             }
                         }
 
+                        Conexion con = new Conexion(getApplicationContext(),"historial3.sqlite",null,1);
+                        SQLiteDatabase db = con.getWritableDatabase();
+                        String sql = "insert into operaciones (tipo,operacion,resultado) values ('Derivada: ','"+ btn +"','"+ resolver(constante,potencia,incognita) +"')";
+                        db.execSQL(sql);
+                        db.close();
                         btn = resolver(constante,potencia,incognita);
                     }
                     igualActivo = true;
@@ -274,7 +291,6 @@ public class DerivadaActivity extends AppCompatActivity implements View.OnClickL
             escribir(btn);
         } catch (Exception e) {
             pantalla.setText("Error");
-            //Toast.makeText(getApplication(),String.valueOf(e),Toast.LENGTH_LONG).show();
         }
     }
 

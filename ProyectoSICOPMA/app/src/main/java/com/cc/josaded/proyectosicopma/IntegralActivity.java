@@ -1,6 +1,7 @@
 package com.cc.josaded.proyectosicopma;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -71,6 +72,7 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                     irPasos.putExtra("potencia", pot);
                     irPasos.putExtra("incognita", inc);
                     irPasos.putExtra("operacion", enviarDerivada);
+                    irPasos.putExtra("clase","i");
                     startActivity(irPasos);
                 }else{
                     Toast.makeText(getApplication(),String.valueOf("No hay operación para mostrar"),Toast.LENGTH_SHORT).show();
@@ -84,6 +86,16 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View v) {
                 Intent irPasos = new Intent(IntegralActivity.this, FormularioActivity.class);
+                irPasos.putExtra("clase","i");
+                startActivity(irPasos);
+            }
+        });
+
+        Button historialGen = (Button) findViewById(R.id.btnHistorial);
+        historialGen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent irPasos = new Intent(IntegralActivity.this, HistorialActivity.class);
                 startActivity(irPasos);
             }
         });
@@ -175,7 +187,6 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btnX:
                     if(!xActivo && !yActivo){
                         btn += "x";
-                        //sd.setText("d/dx");
                         xActivo = true;
                         puntoActivo = true;
                     }
@@ -183,7 +194,6 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                 case R.id.btnY:
                     if(!xActivo && !yActivo){
                         btn += "y";
-                        //sd.setText("d/dy");
                         yActivo = true;
                         puntoActivo = true;
                     }
@@ -234,8 +244,8 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                     enviarDerivada = btn;
                     if (btn.equals("x") || btn.equals("y")){
                         inc = btn;
-                        btn = "1";
-                        pot = 1;
+                        btn = "x^2";
+                        pot = 2;
                         cons = 1;
                     }else{
                         String constante = "";
@@ -260,6 +270,11 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                                 potencia += String.valueOf(btn.charAt(i));
                             }
                         }
+                        Conexion con = new Conexion(getApplicationContext(),"historial3.sqlite",null,1);
+                        SQLiteDatabase db = con.getWritableDatabase();
+                        String sql = "insert into operaciones (tipo,operacion,resultado) values ('Integral: ','"+ btn +"','"+ resolver(constante,potencia,incognita) +"')";
+                        db.execSQL(sql);
+                        db.close();
                         btn = resolver(constante,potencia,incognita);
                     }
                     igualActivo = true;
@@ -269,7 +284,6 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
             escribir(btn);
         } catch (Exception e) {
             pantalla.setText("Error");
-            //Toast.makeText(getApplication(),String.valueOf(e),Toast.LENGTH_LONG).show();
         }
     }
 
@@ -278,14 +292,13 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
         if (!c.equals("") && p.equals("") && i.equals("")){
             cons = Double.parseDouble(c);
             pot = 0;
-            inc = "";
-            return "0";
-        }else if(!c.equals("") && p.equals("") && !i.equals("")){
-            cons = Double.parseDouble(c);
-            pot = 0;
-            inc = i;
-            return c;
-        }else{
+            inc = "x";
+            return c + "x";
+        }
+        else{
+            if(p.equals("")){p = "1";}
+            if(c.equals("")){p = "1";}
+
             double op1 = Double.parseDouble(c);
             double op2 = Double.parseDouble(p);
             double r = op1 * op2;
@@ -293,20 +306,21 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
             pot = op2;
             inc = i;
             res = disminuirDecimales(String.valueOf(r));
-            if (r == 0 || r == 0.0){
-                return i + disminuirPotencia(p);
+            if (r == 0 || r == 0.0 || r == 1 || r == 1.0){
+                return i + aumentarPotencia(p);
             }else{
-                p = disminuirPotencia(p);
-                if(p.equals("1") || p.equals("0")){
+                p = aumentarPotencia(p);
+                if(p.equals("1")){
                     return res + i;
                 }else{
                     return res + i + "^" + p;
                 }
             }
         }
+
     }
 
-    public String disminuirPotencia(String p){
+    public String aumentarPotencia(String p){
         double pot = Double.parseDouble(p)+1;
         String cadena = String.valueOf(pot);
         return disminuirDecimales(cadena);

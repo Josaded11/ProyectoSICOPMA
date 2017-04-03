@@ -11,31 +11,32 @@
     tools:context="com.cc.josaded.proyectosicopma.FormularioActivity"
     android:background="#0B0B39">
 
-    <FrameLayout
-        android:layout_marginTop="100dp"
+    <TextView
+        android:text="Formulario:"
+        android:id="@+id/textView"
+        android:textSize="27sp"
+        android:layout_height="47dp"
+        android:textColor="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="5dp"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:background="@android:color/holo_red_light" />
+
+    <FrameLayout
         android:layout_width="325dp"
-        android:layout_height="460dp"
+        android:layout_height="475dp"
         android:background="#101043"
-        android:id="@+id/contenedorPasos">
+        android:id="@+id/contenedorPasos"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true">
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/lvForm" />
     </FrameLayout>
-
-    <TextView
-        android:text="Formulario:"
-        android:id="@+id/textView"
-        android:textSize="30sp"
-        android:layout_height="40dp"
-        android:textColor="@android:color/white"
-        android:layout_width="230dp"
-        android:layout_marginTop="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="21dp" />
 
 </RelativeLayout>

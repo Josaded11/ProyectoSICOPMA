@@ -20,7 +20,8 @@
         <activity android:name=".EcuacionActivity" />
         <activity android:name=".PasosDerivadaActivity" />
         <activity android:name=".FormularioActivity" />
-        <activity android:name=".IntegralActivity"></activity>
+        <activity android:name=".IntegralActivity" />
+        <activity android:name=".HistorialActivity"></activity>
     </application>
 
 </manifest>

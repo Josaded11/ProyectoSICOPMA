@@ -159,40 +159,28 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="%"
+        android:text="x"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnPotencia"
         android:layout_toEndOf="@+id/btnSiete"
-        android:id="@+id/btnPorcentaje"
+        android:id="@+id/btnX"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="√"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnPorcentaje"
-        android:layout_toEndOf="@+id/btnOcho"
-        android:id="@+id/btnRaiz"
-        android:textSize="20sp"
-        android:background="#101043"
-        android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
-
-    <Button
-        android:text="/"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnRaiz"
+        android:layout_alignTop="@+id/btnY"
         android:layout_toEndOf="@+id/btnNueve"
         android:id="@+id/btnDivision"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
     <Button
         android:text="1"
@@ -231,40 +219,40 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="x"
+        android:text=""
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnReiniciar"
         android:layout_toEndOf="@+id/btnPotencia"
-        android:id="@+id/btnX"
+        android:id="@+id/button1"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:enabled="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignTop="@+id/button1"
+        android:layout_toEndOf="@+id/btnX"
+        android:id="@+id/button2"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="y"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnX"
-        android:layout_toEndOf="@+id/btnPorcentaje"
-        android:id="@+id/btnY"
-        android:textSize="20sp"
-        android:background="#101043"
-        android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
-
-    <Button
-        android:text="*"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/btnY"
-        android:layout_toEndOf="@+id/btnRaiz"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toEndOf="@+id/btnY"
         android:id="@+id/btnMultiplicar"
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
 
     <TextView
@@ -277,7 +265,6 @@
         android:textColor="@android:color/white" />
 
     <TextView
-        android:text="Derivar"
         android:layout_width="wrap_content"
         android:id="@+id/tvO"
         android:textSize="17sp"
@@ -288,7 +275,7 @@
         android:textColor="@android:color/white" />
 
     <Button
-        android:text="-"
+        android:text="     -"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:id="@+id/btnResta"
@@ -338,7 +325,7 @@
         android:inputType="none"
         android:ems="10"
         android:id="@+id/etPantallaResultado"
-        android:textSize="40sp"
+        android:textSize="34sp"
         android:textAlignment="textEnd"
         android:focusable="false"
         android:layout_marginTop="14dp"
@@ -346,7 +333,7 @@
         android:background="#101043"
         android:layout_below="@+id/btnPasos"
         android:layout_alignParentStart="true"
-        android:maxLength="10"/>
+        android:maxLength="18"/>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -391,7 +378,8 @@
             android:layout_alignBottom="@+id/rbEcuaciones"
             android:layout_alignStart="@+id/rbIntegrales"
             android:textSize="16sp"
-            android:onClick="derivar" />
+            android:onClick="derivar"
+            android:enabled="true" />
 
         <RadioButton
             android:text="Operaciones básicas"
@@ -406,15 +394,28 @@
 
     </RadioGroup>
 
-    <TextView
+    <Button
+        android:text="historial"
+        android:layout_width="180dp"
+        android:layout_height="35dp"
+        android:layout_below="@+id/etPantallaResultado"
+        android:layout_toEndOf="@+id/rgOpcion"
+        android:id="@+id/btnHistorial"
+        android:background="#101043"
+        android:textSize="11sp"
+        android:elevation="1dp" />
+
+    <Button
+        android:text="="
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvDerivada"
-        android:textSize="40sp"
-        android:textColor="@android:color/background_light"
-        android:textAlignment="center"
-        android:layout_alignBaseline="@+id/etPantallaResultado"
-        android:layout_alignBottom="@+id/etPantallaResultado"
-        android:layout_alignParentStart="true" />
+        android:layout_height="45dp"
+        android:id="@+id/btnY"
+        android:textSize="20sp"
+        android:background="#101043"
+        android:textColor="@android:color/white"
+        android:textStyle="normal|bold"
+        android:layout_alignBaseline="@+id/btnX"
+        android:layout_alignBottom="@+id/btnX"
+        android:layout_toEndOf="@+id/btnX" />
 
 </RelativeLayout>
