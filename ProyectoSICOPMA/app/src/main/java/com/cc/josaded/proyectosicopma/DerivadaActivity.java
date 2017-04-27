@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,10 +34,14 @@ public class DerivadaActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toast t = Toast.makeText(getApplicationContext(),"Ejemplo de derivada: 25x^5",Toast.LENGTH_LONG);
+        t.setGravity(Gravity.CENTER,-25,-273);
+        t.show();
+
         setContentView(R.layout.activity_derivada);
         pantalla = (EditText) findViewById(R.id.etPantallaResultado);
         sd = (TextView) findViewById(R.id.tvDerivada);
-
 
         RadioButton rOpBa = (RadioButton) findViewById(R.id.rbOpBasicas);
         rOpBa.setOnClickListener(new View.OnClickListener() {

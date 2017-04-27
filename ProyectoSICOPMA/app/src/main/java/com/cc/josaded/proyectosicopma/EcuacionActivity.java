@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,7 @@ public class EcuacionActivity extends AppCompatActivity implements View.OnClickL
     private double aEnviar = 0;
     private double bEnviar = 0;
     private double cEnviar = 0;
+    private int numInc = 0;
 
     private boolean igualActivo, igualCActivo, puntoActivo, xActivo, yActivo = false;
     private Button cero,uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,punto,borrar,reiniciar,igual,igualC,sumar,restar,dividir,multiplicar,potencia, x ,y;
@@ -26,6 +28,11 @@ public class EcuacionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toast t = Toast.makeText(getApplicationContext(),"Ejemplo de ecuación: 5x^2 + 4x + 3",Toast.LENGTH_LONG);
+        t.setGravity(Gravity.CENTER,-65,-273);
+        t.show();
+
         setContentView(R.layout.activity_ecuacion);
         pantalla = (EditText) findViewById(R.id.etPantallaResultado);
 

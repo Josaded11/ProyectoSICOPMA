@@ -8,20 +8,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".MainActivity"/>
         <activity android:name=".PasosActivity" />
         <activity android:name=".DerivadaActivity" />
         <activity android:name=".EcuacionActivity" />
         <activity android:name=".PasosDerivadaActivity" />
         <activity android:name=".FormularioActivity" />
         <activity android:name=".IntegralActivity" />
-        <activity android:name=".HistorialActivity"></activity>
+        <activity android:name=".HistorialActivity" />
+        <activity android:name=".MenuActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

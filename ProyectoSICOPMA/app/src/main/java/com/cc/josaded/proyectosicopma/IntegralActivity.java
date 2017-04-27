@@ -2,8 +2,10 @@ package com.cc.josaded.proyectosicopma;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +31,10 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_integral);
+
+        Toast t = Toast.makeText(getApplicationContext(),"Ejemplo de integral: 100x^4",Toast.LENGTH_LONG);
+        t.setGravity(Gravity.CENTER,-25,-273);
+        t.show();
 
         pantalla = (EditText) findViewById(R.id.etPantallaResultado);
         sd = (TextView) findViewById(R.id.tvDerivada);
@@ -244,7 +250,8 @@ public class IntegralActivity extends AppCompatActivity implements View.OnClickL
                     enviarDerivada = btn;
                     if (btn.equals("x") || btn.equals("y")){
                         inc = btn;
-                        btn = "x^2";
+                        if(btn.equals("x")){ btn = "x^2";}
+                        if(btn.equals("y")){ btn = "y^2";}
                         pot = 2;
                         cons = 1;
                     }else{

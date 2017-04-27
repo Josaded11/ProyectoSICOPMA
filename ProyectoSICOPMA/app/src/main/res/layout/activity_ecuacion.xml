@@ -325,7 +325,7 @@
         android:inputType="none"
         android:ems="10"
         android:id="@+id/etPantallaResultado"
-        android:textSize="34sp"
+        android:textSize="37sp"
         android:textAlignment="textEnd"
         android:focusable="false"
         android:layout_marginTop="14dp"
@@ -406,7 +406,6 @@
         android:elevation="1dp" />
 
     <Button
-        android:text="="
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:id="@+id/btnY"
@@ -416,6 +415,7 @@
         android:textStyle="normal|bold"
         android:layout_alignBaseline="@+id/btnX"
         android:layout_alignBottom="@+id/btnX"
-        android:layout_toEndOf="@+id/btnX" />
+        android:layout_toEndOf="@+id/btnX"
+        android:enabled="false" />
 
 </RelativeLayout>

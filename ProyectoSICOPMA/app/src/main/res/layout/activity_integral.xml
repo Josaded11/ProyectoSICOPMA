@@ -111,7 +111,6 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="+"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_above="@+id/btnIgual"
@@ -120,7 +119,8 @@
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
     <Button
         android:text="7"
@@ -183,7 +183,6 @@
         android:textStyle="normal|bold" />
 
     <Button
-        android:text="/"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/btnY"
@@ -192,7 +191,8 @@
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
     <Button
         android:text="1"
@@ -257,7 +257,6 @@
         android:enabled="false" />
 
     <Button
-        android:text="*"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_alignTop="@+id/button2"
@@ -266,7 +265,8 @@
         android:textSize="20sp"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
 
     <TextView
@@ -289,7 +289,6 @@
         android:textColor="@android:color/white" />
 
     <Button
-        android:text="     -"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:id="@+id/btnResta"
@@ -298,7 +297,8 @@
         android:layout_alignParentEnd="true"
         android:background="#101043"
         android:textColor="@android:color/white"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        android:enabled="false" />
 
     <Button
         android:text="C "
